@@ -1,0 +1,871 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+  /* Temporary Grid Overlay body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 50px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 50px
+  );
+z-index: 9999; /* Ensure it stays on top of everything 
+}*/
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px); /* Start off-screen to the left */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0); /* Moves into position */
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px); /* Start off-screen to the right */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0); /* Moves into position */
+}
+
+/* Initial state for fade-in elements */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out; /* Increased duration to 1.5 seconds */
+}
+
+/* Final state when the element is visible */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+  
+  /* Desktop Hero Section */
+  .hero {
+    display: flex;
+    height: 90vh; /* Full screen height */
+  }
+  
+  .hero-text {
+    flex: 1;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the left */
+    padding: 0 140px; /* Adjust horizontal padding */
+}
+  
+  .hero-text h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+  }
+  
+  .hero-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .hero-video {
+    margin-top: 900px;
+    flex: 1;
+    background-color: white; /* White background */
+    display: flex;
+    align-items: flex-end; /* Align the video at the bottom */
+    justify-content: center;
+    position: relative;
+  }
+  
+  .hero-video video {
+    width: 100%; /* Smaller video width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+  }
+  
+  /* General Navbar Styling */
+  .navbar {
+    position: fixed; /* Keeps the navbar fixed at the top */
+  top: 0; /* Sticks the navbar to the top of the page */
+  z-index: 1000; /* Keeps it above other content */
+    height: 5vh; /* Full screen height */
+    width: 100%; /* Ensures the navbar spans the full width of the page */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-logo a img {
+    height: 60px; /* Adjust logo size */
+    display: block;
+  }
+  
+  /* Center and Add Spacing for Navbar Links */
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    margin: 0 auto; /* Center the links container */
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    margin: 0 25px; /* Add space between the items */
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    color: #FA6F16; /* Accent color on hover */
+  }
+  
+  /* Action Button Styling */
+  .navbar-action .action-button {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin-right: 60px; /* Add spacing between the button and the edge */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: auto; /* Ensures the button is spaced from the other elements */
+  }
+  
+  .navbar-action .action-button:hover {
+    background-color: #FA6F16; /* Accent color */
+    color: white;
+  }
+  
+  /* Mobile-Specific Menu Button */
+  .menu-button {
+    display: none; /* Hidden by default */
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 10% auto;
+    color: black;
+    padding: 20px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .close-button {
+    color: black;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: #FA6F16;
+  }
+  
+  .submit-button {
+    background-color: #FA6F16;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .submit-button:hover {
+    background-color: #FA6F16;
+  }
+  
+  input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    margin-bottom: 15px; /* Space between fields */
+  width: 100%; /* Input fields span the container */
+  box-sizing: border-box; /* Respect padding within width */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  label {
+    display: block; /* Ensure labels are block elements */
+    margin-bottom: 5px; /* Space between label and input field */
+    text-align: left; /* Align labels to the left */
+  }
+  
+/* Section Styling */
+#user-flow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background-color: black;
+  color: white;
+}
+
+/* General Carousel Styling */
+.carousel-container {
+  position: relative;
+  width: 80vw;
+  height: 60vh;
+  perspective: 1500px; /* Increased perspective for a more dramatic 3D effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible; /* Ensure arrows are not clipped */
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-300px); /* Center the carousel */
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%);
+  width: 242px; /* Fixed size for consistent spacing */
+  height: 501.6px;
+  background: #00000000;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+  opacity: 0.4; /* Default opacity for inactive slides */
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1; /* Highlight the active slide */
+  transform: translate(-50%, -50%) rotateY(0deg) translateZ(300px); /* Center and bring forward */
+}
+
+.carousel-slide img {
+  width: 242px;
+  height: 501.6px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Positioning the Slides */
+.carousel-slide:nth-child(1) {
+  transform: translate(-50%, -50%) rotateY(0deg) translateZ(300px);
+}
+.carousel-slide:nth-child(2) {
+  transform: translate(-50%, -50%) rotateY(120deg) translateZ(300px);
+}
+.carousel-slide:nth-child(3) {
+  transform: translate(-50%, -50%) rotateY(240deg) translateZ(300px);
+}
+.carousel-slide:nth-child(1) img {
+  transform: translateX(3px); /* Move the image 10px to the right */
+}
+.carousel-slide:nth-child(3) img {
+  transform: translateX(2px); /* Move the image 10px to the right */
+}
+.carousel-slide:nth-child(2) img {
+  transform: translateX(14px); /* Move the image 10px to the right */
+}
+
+/* Caption Styling */
+.carousel-caption {
+  position: absolute;
+  top: 5%; /* Adjusted to be above the carousel */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Navigation Arrows */
+.carousel-navigation {
+  position: absolute;
+  bottom: -90px; /* Below the carousel */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.carousel-arrow {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.5em;
+  border-radius: 50%; /* Circular buttons */
+  cursor: pointer;
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for exact centering */
+  transition: background-color 0.3s ease;
+  z-index: 10; /* Ensure arrows are above the slides */
+}
+
+.carousel-arrow:hover {
+  background-color: #555;
+  color: white;
+}
+
+/* Left Arrow */
+.carousel-arrow.left-arrow {
+  left: 20%; /* Adjust to move the arrow to the left of the carousel */
+}
+
+/* Right Arrow */
+.carousel-arrow.right-arrow {
+  right: 20%; /* Adjust to move the arrow to the right of the carousel */
+}
+
+  
+  /* Team Section */
+  .team {
+    text-align: center;
+    background-color: white; /* Light background for the page */
+    height: 90vh; /* Full screen height */
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
+  }
+  
+
+  /* Team Card Styling */
+.team-card {
+  background-color: black; /* Default card background color */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: visible; /* Allow images to pop out */
+  text-align: center;
+  width: 400px; /* Fixed width for consistency */
+  padding: 20px 20px 40px; /* Extra bottom padding to balance layout */
+  margin: auto;
+  margin-right: 100px;
+  position: relative; /* Allows image to "pop out" */
+}
+
+/* Container Fix for Overflow */
+.team-container {
+  display: flex;
+  justify-content: center;
+  gap: 60px; /* Space between cards */
+  flex-wrap: wrap; /* Wrap on smaller screens */
+  overflow: visible; /* Ensure popped-out images are not cropped */
+}
+
+/* Team Photo Styling */
+.team-card .team-photo {
+  width: 220px; /* Adjust image size */
+  height: auto;
+  object-fit: cover;
+  position: absolute; /* Makes it "pop out" of the card */
+  top: -120px; /* Adjust this to fine-tune pop-out height */
+  left: 50%;
+  transform: translateX(-50%); /* Center image horizontally */
+  
+}
+
+/* Card Content */
+.team-card h3 {
+  font-size: 1.5rem;
+  margin: 70px 0 5px; /* Adjust margin to account for pop-out effect */
+  color: #ffffff;
+}
+
+.team-card p {
+  font-size: 1.rem;
+  color: #989898;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+
+}
+
+/* Social Media Links */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between icons */
+  margin-top: 10px;
+}
+
+.social-links a {
+  font-size: 1.2rem;
+  color: #ffcdcd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #DD3A3A; /* Accent color */
+}
+
+/* Two-Column Layout */
+.team-layout {
+  display: flex;
+  gap: 90px; /* Space between the two columns */
+  align-items: flex-start; /* Align both sections at the top */
+  padding: 50px;
+  padding-top: 200px;
+  position: relative; /* For the divider line */
+}
+
+/* Divider Line */
+.team-layout::before {
+  content: "";
+  width: 5px;
+  background-color: #000000; /* Light gray divider */
+  height: 70%; /* Full height */
+  position: absolute;
+  left: 50%; /* Center the divider */
+  transform: translateX(-50%);
+}
+
+/* Right Column (How This Got Started) */
+.team-story {
+  max-width: 400px;
+  text-align: left; /* Align text with the left column */
+  margin: 0 auto; /* Center the element horizontally */
+  position: relative;
+  left: -40px; /* Adjust this value to move it closer to the middle */
+}
+
+.team-story h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #000000; /* White text for the title */
+}
+
+.team-story p {
+  font-size: 1rem;
+  color: #4a4a4a; /* Light gray text */
+  line-height: 1.6;
+}
+
+/* Social Media Links with Updated Icons */
+.social-links a {
+  font-size: 1.5rem;
+  color: #ffcdcd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #DD3A3A; /* Accent color */
+}
+
+/* Instagram, LinkedIn, and Twitter Icons */
+.social-links a .fab.fa-instagram {
+  color: #e4405f; /* Instagram color */
+}
+
+.social-links a .fab.fa-linkedin {
+  color: #0077b5; /* LinkedIn color */
+}
+
+.social-links a .fab.fa-twitter {
+  color: #1da1f2; /* Twitter color */
+}
+
+
+/* Character Portal Section */
+.character-portal {
+  padding-top: 50px;
+  text-align: center;
+  align-items: center;
+  position: relative; /* Allows overlay positioning */
+  color: white; /* Ensures text stands out against the background */
+  min-height: 70vh; /* Ensure the section spans the full viewport height */
+  
+  /* Background Properties */
+  background-image: url('assets/74e54143e794f42f0e2741742118a0ce.jpg'); /* Replace with your image path */
+  background-size: cover; /* Ensure the image covers the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent tiling */
+}
+
+/* Add a semi-transparent overlay */
+.character-portal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent black overlay (50% opacity) */
+  z-index: 1; /* Place above the image but below the content */
+}
+
+/* Ensure text and content appear above the overlay */
+.character-portal h2,
+.character-portal p,
+.character-grid {
+  position: relative; /* Keeps content above the overlay */
+  z-index: 2;
+}
+
+
+/* Ensure text and content appear above the overlay */
+.character-portal h2, .character-portal p, .character-grid {
+  position: relative; /* Keeps content above the overlay */
+  z-index: 2;
+}
+
+
+.character-portal h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000; /* Black text */
+  z-index: 2;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 20px; /* Spacing between columns */
+  width: 80%;
+  justify-items: center; /* Center items horizontally */
+  align-items: start; /* Align items to the top */
+  margin: auto;
+  z-index: 2;
+}
+
+.character-column {
+  text-align: center;
+  padding: 0px;
+  border-radius: 10px;
+  max-width: 300px; /* Adjustable max width */
+  position: relative; /* Enables manual positioning */
+}
+
+.character-column img {
+  width: auto; /* Allow flexible width */
+  height: auto; /* Allow flexible height */
+  max-width: 100%; /* Prevent images from exceeding column width */
+  border-radius: 35px; /* Rounded edges for images */
+  margin-bottom: 15px;
+  z-index: 2;
+}
+
+.character-column h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000000; /* Black text */
+  z-index: 2;
+}
+
+.character-column p {
+  font-size: 1rem;
+  color: #000000; /* Dark gray for description */
+  z-index: 2;
+}
+
+/* Manual Alignment and Sizing for Each Column */
+.character-column:nth-child(1) img {
+  transform: translateY(-23px) translateX(-25px); /* Correct transformation */
+  width: 400px; /* Resize image width */
+  height: 590px;
+  max-width: none; /* Ensure max-width doesn’t override the width */
+}
+
+.character-column:nth-child(2) img {
+  transform: translateY(-9px) translateX(-25px); /* Correct transformation */
+  width: 370px; /* Resize image width */
+  max-width: none; /* Ensure max-width doesn’t override the width */
+}
+
+.character-column:nth-child(3) img{
+  transform: translateY(23px) translateX(-25px); /* Correct transformation */
+  width: 330px; /* Resize image width */
+  max-width: none; /* Ensure max-width doesn’t override the width */
+  height: 530px;
+}
+
+/* Vision Section */
+/* Vision Section */
+.vision-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px;
+  color: white; /* Ensure text stands out */
+  position: relative; /* Necessary for overlay and content positioning */
+  overflow: hidden; /* Ensures the video doesn't spill out of the section */
+  z-index: 0; /* Ensures the content sits above the video */
+}
+
+.vision-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black overlay */
+  z-index: 1; /* Place above the video but below content */
+}
+
+.vision-section video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the video */
+  width: 100%; /* Stretch to cover the section */
+  height: 100%; /* Stretch to cover the section */
+  object-fit: cover; /* Ensure the video covers the entire area */
+  z-index: -1; /* Place the video behind the overlay and content */
+}
+
+  .vision-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff; /* Black text */
+    z-index: 2;
+  }
+  
+  .vision-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #dddddd; /* Dark gray text */
+    max-width: 800px; /* Optional: limit paragraph width */
+    z-index: 2;
+
+  }
+  
+/* Learn More Button */
+.learn-more-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff; /* White text */
+  background-color: #FA6F16; /* Blue background */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 2;
+
+}
+
+.learn-more-button:hover {
+  background-color: #903700; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+
+/* About Section */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  height: 100vh; /* Full viewport height */
+  position: relative;
+  overflow: hidden; /* Ensure video stays within bounds */
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure it overlays the video but stays behind the content */
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* Ensure video is behind everything */
+}
+
+.text-container {
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  padding: 20px;
+  border-radius: 50px;
+  margin: 100px; /* Center horizontally */
+  max-width: 1000px;
+  color: #fff; /* White text for contrast */
+  z-index: 2; /* Ensure content is above overlay */
+  position: relative; /* Enables the use of 'top' */
+  top: 80px; /* Adjust this value to move the container down */
+}
+
+
+.about-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.bottom-right-text {
+  position: absolute;
+  bottom: 30px;
+  right: 60px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff; /* White text for visibility */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Optional: subtle shadow for better readability */
+  z-index: 2; /* Ensure it stays above the overlay */
+}
+
+
+ 
+  
+  /* Mobile-Specific Changes */
+  @media (max-width: 768px) {
+    .menu-button {
+      display: block;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+  
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .navbar-links {
+      display: none; /* Initially hidden */
+      flex-direction: column;
+      background-color: black;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      padding: 15px 0;
+      text-align: center;
+    }
+  
+    .navbar-links.dropdown.open {
+      display: flex; /* Show dropdown when active */
+    }
+  
+    .navbar-links a {
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+  
+    .hero {
+      flex-direction: column; /* Stack sections vertically */
+      height: 100vh; /* Full screen height */
+    }
+  
+    .hero-text {
+      flex: none; /* Allow content to resize dynamically */
+      height: 50%; /* Text section takes up half the screen */
+      padding: 20px; /* Reduce padding for smaller screens */
+      text-align: center; /* Center-align text */
+    }
+  
+    .hero-text h1 {
+      font-size: 2rem; /* Adjust font size */
+    }
+  
+    .hero-text p {
+      font-size: 0.9rem; /* Adjust paragraph size */
+    }
+  
+    .hero-video {
+      flex: none; /* Allow video section to resize dynamically */
+      height: 50%; /* Video section takes up the other half */
+    }
+  
+    .hero-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure video covers its area */
+    }
+  
+    .team-container {
+      flex-direction: column; /* Stack team cards vertically */
+      gap: 20px; /* Reduce spacing on smaller screens */
+    }
+    
+    
+  }
+  

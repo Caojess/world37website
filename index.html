@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World 37</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+          <a href="#"><img src="assets/W37logo.png" alt="Company Logo" /></a>
+        </div>
+        <ul class="navbar-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="team.html">Team</a></li>
+
+        </ul>
+        <div class="navbar-action">
+          <a href="#waitlist" class="action-button">Join the Waitlist</a>
+        </div>
+        <div class="menu-button" onclick="toggleMenu()">☰</div> <!-- Only for mobile -->
+      </nav>
+      
+      <!-- Modal Structure -->
+      <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal()">&times;</span>
+          <h2>Join the Waitlist</h2>
+          <form id="waitlistForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required />
+      
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required />
+      
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required />
+      
+            <label for="testingInterest">
+              <input type="checkbox" id="testingInterest" name="testingInterest" />
+              I want to be part of the early testing group.
+            </label>
+      
+            <button type="submit" class="submit-button">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+      
+  <script>
+ const modal = document.getElementById("waitlistModal");
+const body = document.body;
+const modalContent = modal.querySelector(".modal-content");
+let form; // Placeholder for the form element
+
+// Save the original modal content for resetting later
+const originalModalContent = modalContent.innerHTML;
+
+// Open Modal
+document.querySelector(".action-button").addEventListener("click", function (e) {
+  e.preventDefault();
+  modalContent.innerHTML = originalModalContent; // Reset to the original form
+  modal.style.display = "block";
+  body.style.overflow = "hidden"; // Disable scrolling
+  form = document.getElementById("waitlistForm"); // Get the form reference
+  attachFormSubmitHandler();
+});
+
+// Close Modal
+function closeModal() {
+  modal.style.display = "none";
+  body.style.overflow = "auto"; // Re-enable scrolling
+}
+
+// Close Modal when clicking outside of it
+window.onclick = function (event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+};
+
+// Attach Form Submit Handler
+function attachFormSubmitHandler() {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(form);
+
+    // Replace the modal content with the success message
+    modalContent.innerHTML = `
+      <h2 style="text-align: center;">Thank you for signing up!</h2>
+      <p style="text-align: center;">Your response is being processed. Feel free to close this window.</p>
+      <button class="close-button" style="display: block; margin: 20px auto;" onclick="closeModal()">Close</button>
+    `;
+
+    // Submit data to Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbxkXS0qvRLU2rQqZDZog8sdq-QFI0ySpM4S2yT7FsUztWuhOtM9s7qXpmWpPdoismnx/exec', {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Response successfully logged to Google Sheets.");
+          form.reset(); // Reset form inputs for future use
+        } else {
+          console.error("Failed to log response to Google Sheets.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
+  });
+}
+
+
+</script>
+
+      
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="fade-in">WELCOME TO WORLD 37</h1>
+      <p class="fade-in">
+        We are a mobile game redefining immersive storytelling by addressing critical gaps in current platforms: static narratives, limited customization, and unresponsive worlds. 
+        Our platform empowers users to create, share, and explore 3D story worlds, leveraging advanced AI technologies such as narrative branching, dynamic scene deployment, 
+        and generative agents to deliver deeply personalized and dynamic experiences.
+      </p>
+      
+    </div>
+    <div class="hero-video">
+      <video autoplay muted loop>
+        <source src="assets/chrotate.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+
+
+  <section id="vision" class="vision-section">
+    <video autoplay muted loop>
+      <source src="assets/fire.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <h2 class="fade-in">Our Vision</h2>
+    <p class="fade-in">
+      Step into a world where your fantasies come to life. World 37 combines stunningly customizable 3D characters with adaptive AI-driven gameplay, creating immersive, interactive stories that feel uniquely yours.
+    </p>
+    
+    <p class="fade-in">
+      The characters you meet and the worlds you explore evolve with you, making every experience deeply personal. Designed for limitless possibilities, World 37 is setting a new standard for scalable, technology-driven storytelling.
+    </p>
+    <a href="about.html" class="learn-more-button">Learn More About the Tech</a>
+  </section>
+  
+  
+  <script>
+    function toggleMenu() {
+      const menu = document.querySelector(".navbar-links");
+      menu.classList.toggle("open");
+    }
+  </script>
+  
+ 
+  
+  <section id="user-flow" style="background-color: black; color: white; padding: 50px 0;">
+    <div class="section-header">
+      <h1 style="text-align: center; font-size: 0em; margin-bottom: 100px;">User Flow</h1>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-arrow left-arrow" id="prev">&lt;</button>
+      <div class="carousel">
+        <div class="carousel-slide" data-caption="1: Choose your story">
+          <img src="assets/screen1.png" alt="Image 1">
+        </div>
+        <div class="carousel-slide" data-caption="2: Create your character">
+          <img src="assets/charscreen.png" alt="2: Create your character">
+        </div>
+        <div class="carousel-slide" data-caption="3: Immerse in the narrative">
+          <img src="assets/gameplayscreen.png" alt="3: Immerse in the narrative">
+        </div>
+      </div>
+      <button class="carousel-arrow right-arrow" id="next">&gt;</button>
+      <div class="carousel-caption">Caption for Image 1</div>
+    </div>
+  </section>
+  
+
+<script>
+const carousel = document.querySelector(".carousel");
+const slides = document.querySelectorAll(".carousel-slide");
+const caption = document.querySelector(".carousel-caption");
+const nextButton = document.getElementById("next");
+const prevButton = document.getElementById("prev");
+
+let currentAngle = 0; // Tracks the total rotation angle
+const angleIncrement = 360 / slides.length; // Calculate the angle between slides
+let currentSlide = 0;
+
+// Update the carousel rotation, caption, and slide opacity
+function updateCarousel() {
+  // Rotate the carousel
+  carousel.style.transform = `translateZ(-300px) rotateY(${currentAngle}deg)`;
+
+  // Update the caption
+  caption.textContent = slides[currentSlide].dataset.caption;
+
+  // Update slide opacity
+  slides.forEach((slide, index) => {
+    if (index === currentSlide) {
+      slide.classList.add("active");
+    } else {
+      slide.classList.remove("active");
+    }
+  });
+}
+
+// Rotate clockwise on "Next" button click
+nextButton.addEventListener("click", () => {
+  currentAngle -= angleIncrement; // Decrease angle to rotate clockwise
+  currentSlide = (currentSlide + 1) % slides.length; // Loop to the first slide after the last
+  updateCarousel();
+});
+
+// Rotate counterclockwise on "Previous" button click
+prevButton.addEventListener("click", () => {
+  currentAngle += angleIncrement; // Increase angle to rotate counterclockwise
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Loop to the last slide before the first
+  updateCarousel();
+});
+
+// Initialize the carousel
+updateCarousel();
+
+</script>
+ 
+  <!-- Character Portal Section -->
+  <section id="character-portal" class="character-portal">
+    <h2 class="fade-in">Character Portal</h2><p class="fade-in" style="text-align: center; font-size: 1.2em; color: black; width: 50%; margin: 0 auto; padding-bottom: 30px;">
+      Create beautiful 3D characters that celebrate diversity and individuality. Our intuitive platform lets you easily craft, save, and share your creations.    </p>
+    <div class="character-grid">
+      <!-- Column 1 -->
+      <div class="character-column">
+        <h3 class="fade-in">Facial Details</h3>
+        <p class="fade-in">Capture a high levl of detail in structure, skin, and makeup</p>
+        <img src="assets/charscreen.png" alt="Character 1" />
+        
+      </div>
+      <!-- Column 2 -->
+      <div class="character-column">
+        <h3 class="fade-in">Body details</h3>
+        <p class="fade-in"> Customize the body type, details, and clothing</p>
+        <img src="assets/body.png" alt="Character 2" />
+      </div>
+      <!-- Column 3 -->
+      <!-- Column 4 -->
+      <div class="character-column">
+        <h3 class="fade-in">Character Library</h3>
+        <p class="fade-in">Save the characters you create for gameplay</p>
+        <img src="assets/charp.png" alt="Character 2" />
+      </div>
+    </div>
+  </section>
+  </body>
+ 
+  <script>
+    // Function to check if an element is in the viewport
+    function isInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top <= window.innerHeight && rect.bottom >= 0;
+    }
+  
+    // Function to handle scroll animations
+    function handleScroll() {
+      // Select all elements with the 'fade-in' class
+      const fadeInElements = document.querySelectorAll('.fade-in');
+  
+      fadeInElements.forEach((el) => {
+        if (isInViewport(el)) {
+          el.classList.add('visible'); // Add the 'visible' class when in viewport
+        }
+      });
+    }
+  
+    // Add scroll and resize event listeners
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+  
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', handleScroll);
+  </script>
+  
+  
+</body>
+</html>

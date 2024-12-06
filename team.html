@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Page</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a href="#"><img src="assets/W37logo.png" alt="Company Logo" /></a>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+
+    </ul>
+    <div class="navbar-action">
+      <a href="#waitlist" class="action-button">Join the Waitlist</a>
+    </div>
+    <div class="menu-button" onclick="toggleMenu()">☰</div> <!-- Only for mobile -->
+  </nav>
+  
+  <!-- Modal Structure -->
+  <div id="waitlistModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Join the Waitlist</h2>
+      <form id="waitlistForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required />
+  
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required />
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required />
+  
+        <label for="testingInterest">
+          <input type="checkbox" id="testingInterest" name="testingInterest" />
+          I want to be part of the early testing group.
+        </label>
+  
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+  
+<script>
+const modal = document.getElementById("waitlistModal");
+const body = document.body;
+const modalContent = modal.querySelector(".modal-content");
+let form; // Placeholder for the form element
+
+// Save the original modal content for resetting later
+const originalModalContent = modalContent.innerHTML;
+
+// Open Modal
+document.querySelector(".action-button").addEventListener("click", function (e) {
+e.preventDefault();
+modalContent.innerHTML = originalModalContent; // Reset to the original form
+modal.style.display = "block";
+body.style.overflow = "hidden"; // Disable scrolling
+form = document.getElementById("waitlistForm"); // Get the form reference
+attachFormSubmitHandler();
+});
+
+// Close Modal
+function closeModal() {
+modal.style.display = "none";
+body.style.overflow = "auto"; // Re-enable scrolling
+}
+
+// Close Modal when clicking outside of it
+window.onclick = function (event) {
+if (event.target === modal) {
+closeModal();
+}
+};
+
+// Attach Form Submit Handler
+function attachFormSubmitHandler() {
+form.addEventListener("submit", function (e) {
+e.preventDefault(); // Prevent default form submission
+
+const formData = new FormData(form);
+
+// Replace the modal content with the success message
+modalContent.innerHTML = `
+  <h2 style="text-align: center;">Thank you for signing up!</h2>
+  <p style="text-align: center;">Your response is being processed. Feel free to close this window.</p>
+  <button class="close-button" style="display: block; margin: 20px auto;" onclick="closeModal()">Close</button>
+`;
+
+// Submit data to Google Sheets
+fetch('https://script.google.com/macros/s/AKfycbxkXS0qvRLU2rQqZDZog8sdq-QFI0ySpM4S2yT7FsUztWuhOtM9s7qXpmWpPdoismnx/exec', {
+  method: "POST",
+  body: formData,
+})
+  .then((response) => {
+    if (response.ok) {
+      console.log("Response successfully logged to Google Sheets.");
+      form.reset(); // Reset form inputs for future use
+    } else {
+      console.error("Failed to log response to Google Sheets.");
+    }
+  })
+  .catch((error) => {
+    console.error("Error:", error.message);
+  });
+});
+}
+
+
+</script>
+
+<section class="team">
+  <div class="team-layout">
+    <!-- Founder Profile -->
+    <div class="team-card" >
+      <img src="assets/jess.png" alt="Jess Cao" class="team-photo" />
+      <h3>Jess Cao</h3>
+      <p>Founder</p>
+      <p>Jess, a junior at Stanford University from Las Vegas, is pursuing Computer Science AI and HCI. She is driven by a love for building—combining the thrill of learning with the desire to create meaningful impact. With an adventurous spirit and a detail-oriented mindset, she thrives on growth, whether she’s designing innovative solutions, vlogging her journey, or exploring new challenges.</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/j3ssicacao/?hl=en"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/jessica-cao-321b28203"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- How This Got Started Section -->
+    <div class="team-story">
+      <h3  class="fade-in">How This Got Started</h3>
+      <p  class="fade-in">
+        World 37 was born from a deep connection to immersive, interactive storytelling and a personal understanding of the frustrations players face in current platforms. Having spent years engaging with games and communities, I’ve seen firsthand the unmet desire for experiences where choices truly shape the narrative. Insights gathered from platforms like TikTok, Reddit, and Wattpad revealed how players creatively attempt to bridge these gaps through fan art, discussions, and social media, yet these solutions often fall short.
+
+This inspired me to create World 37—a place where cutting-edge design, AI, and user-driven storytelling come together to build rich, immersive worlds. By addressing outdated graphics and technology, and crafting realistic story environments, we’re shaping a platform that fulfills the timeless human desire to escape, explore, and create meaningful alternate realities.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Function to check if an element is in the viewport
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top <= window.innerHeight && rect.bottom >= 0;
+  }
+
+  // Function to handle scroll animations
+  function handleScroll() {
+    // Select all elements with the 'fade-in' class
+    const fadeInElements = document.querySelectorAll('.fade-in');
+
+    fadeInElements.forEach((el) => {
+      if (isInViewport(el)) {
+        el.classList.add('visible'); // Add the 'visible' class when in viewport
+      }
+    });
+  }
+
+  // Add scroll and resize event listeners
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', handleScroll);
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', handleScroll);
+</script>
+
+  
+</body>
+</html>
